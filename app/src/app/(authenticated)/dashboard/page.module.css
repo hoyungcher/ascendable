@@ -1,0 +1,44 @@
+.tableCell {
+    text-align: left;
+    padding-left: 8px;
+}
+
+.uploadButton {
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+}
+
+.progressCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 16px;
+    margin-top: 16px;
+}
+
+.progressCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    border-radius: 4px;
+ 
+}
+
+.progressNumber {
+    font-size: 36px;
+}
+
+.progressMetric {
+    font-size: 16px;
+}
+
+.progressChange {
+    font-size: 12px;
+}
