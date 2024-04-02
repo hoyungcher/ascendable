@@ -4,6 +4,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
+  --border-hex: #d0d0d0;
+  --background-hex: #fbfbfd;
 }
 
 @media (prefers-color-scheme: dark) {

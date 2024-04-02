@@ -1,39 +1,86 @@
 .mainContainer {
     height: 100vh;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
 }
 
 .topbar {
     display: flex;
     flex-direction: row;
+    /* height: 64px; */
     justify-content: space-between;
-    height: 64px;
-    background-color: burlywood;
-    align-items: center;
-    padding: 0 16px;
+    border-bottom: 2px solid var(--border-hex);
 }
 
-.sidebar {
+.topbarLeft {
     display: flex;
     flex-direction: column;
-    width: 160px;
-    height: calc(100vh - 64px);
-    background-color: #f0f0f0;
 }
 
-.menuItem {
-    padding: 8px 16px;
+.tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.tab {
     cursor: pointer;
+    margin-right: 16px;
+    position: relative;
+    border: none;
 }
 
-.menuItem:hover {
-    background-color: #e0e0e0;
+.activeTab {
+    position: relative;
+}
+
+.activeTab::after {
+    content: ''; 
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px; 
+    border-bottom: 2px solid green;
+}
+
+.tabText {
+    font-size: 14px;
 }
 
 .container {
     padding: 32px;
-    height: calc(100vh - 64px);
+    height: 100%;
 }
 
 .logo {
-    font-size: x-large;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.navbarButton {
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px rgba(0, 0, 0, 0.4);
+    height: 32px;
+    width: 32px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.navbarButton:active {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(2px);
+  }
+
+.topbarRight {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
 }

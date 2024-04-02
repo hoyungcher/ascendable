@@ -66,7 +66,7 @@ const progressMetrics = [
     },
 ]
 
-export default function Home() {
+export default function Dashboard() {
     return (
         <div className="flex flex-col">
             <section id="top-section" className="grid grid-cols-[1fr_240px] gap-8">
@@ -94,9 +94,6 @@ export default function Home() {
                         ))}
                     </div>
                 </section>
-                <section id="upload" className="w-[240px]">
-                    <button className={styles.uploadButton}>Upload Flight</button>
-                </section>
             </section>
             <section id="bottom-section" className="mt-4">
                 <h2 className="pl-[8px]">Latest Flights</h2>
@@ -111,7 +108,7 @@ export default function Home() {
                     </thead>
                     <tbody>
                         {flightData.map((flight, i) => (
-                            <tr key={i} className="grid grid-cols-[12ch_1fr_12ch_12ch]">
+                            <tr key={i} className={styles.tableRow}>
                                 <td className={styles.tableCell}>{flight.date}</td>
                                 <td className={styles.tableCell}>{flight.site}</td>
                                 <td className={styles.tableCell}>{flight.flightTime}</td>
