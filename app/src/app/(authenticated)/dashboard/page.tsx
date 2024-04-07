@@ -1,5 +1,8 @@
+import { NextPage } from 'next';
+
 import styles from './page.module.css'
 
+// Dummy Data
 const flightData = [
     {
         date: "2024-02-21",
@@ -66,7 +69,8 @@ const progressMetrics = [
     },
 ]
 
-export default function Dashboard() {
+
+const Dashboard: NextPage = async () => {
     return (
         <div className="flex flex-col">
             <section id="top-section" className="grid grid-cols-[1fr_240px] gap-8">
@@ -121,3 +125,5 @@ export default function Dashboard() {
         </div>
     )
 }
+
+export default Dashboard;
