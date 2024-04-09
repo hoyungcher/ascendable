@@ -56,10 +56,6 @@ export async function loginWithGoogle() {
   if (error) {
     redirect('/error')
   }
-  if (data) {
-    redirect(data.url)
-  }
-  redirect('/dashboard')
 }
 
 export async function signupWithEmail(formData: FormData) {
