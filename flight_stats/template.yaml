@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  flight-stats
+
+  SAM for calculating flight stats
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 256
+    Runtime: python3.10
+    Architectures:
+      - x86_64
+
+    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
+    LoggingConfig:
+      LogFormat: JSON
+Resources:
+  FlightStatsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      DefinitionBody:
+        swagger: "2.0"
+        info:
+          title: "FlightStatsAPI"
+        paths:
+          /flight_stats:
+            post:
+              produces:
+              - "application/json"
+              responses: {}
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${FlightStatsFunction.Arn}/invocations
+                responses: {}
+                httpMethod: POST
+                type: aws_proxy
+  FlightStatsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: flight_stats/
+      Handler: app.lambda_handler
+      Events:
+        FlightStats:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /flight_stats
+            Method: post
+            RestApiId:
+                Ref: FlightStatsApi
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  FlightStatsApi:
+    Description: API Gateway endpoint URL for dev stage for Flight Stats function
+    Value: !Sub "https://${FlightStatsApi}.execute-api.${AWS::Region}.amazonaws.com/dev/flight_stats"
+  FlightStatsFunction:
+    Description: Flight Stats Lambda Function ARN
+    Value: !GetAtt FlightStatsFunction.Arn
+  FlightStatsFunctionIamRole:
+    Description: Implicit IAM Role created for Flight Stats function
+    Value: !GetAtt FlightStatsFunctionRole.Arn
