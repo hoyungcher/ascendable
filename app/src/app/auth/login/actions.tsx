@@ -50,9 +50,12 @@ export async function loginWithGoogle() {
         access_type: 'offline',
         prompt: 'consent',
       },
-      redirectTo: "http://localhost:3000/dashboard"
+      redirectTo: "http://localhost:3001/dashboard"
     },
   })
+  if (data && data.url) {
+    redirect(data.url);
+  }
   if (error) {
     redirect('/error')
   }
